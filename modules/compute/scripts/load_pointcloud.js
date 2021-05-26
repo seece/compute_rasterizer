@@ -1,18 +1,18 @@
 
 // modify this with your own point cloud
-var path = "D:/dev/pointclouds/benchmark/retz/original.las";
+var path = "G:/dump/models/las/towerComplete.las";
 
 window.width = 1920;
 window.height = 1080;
 
 // set window.x to 0 if you've only got a single monitor
 // 2560 puts it on the second screen under the assumption that the first is 2560 wide
-window.x = 2560;
+window.x = 180;
 window.y = 0;
 camera.fov = 60;
 
-var position = [601.58, 88.77, -825.31];
-var lookAt   = [574.89, 53.27, -862.30];
+var position = [372.9134814514926, 57.50640546066466, -413.75759660740596];
+var lookAt   = [303.55600944451317, 41.36742696667767, -384.6436357619634];
 
 // prints the current view to the console
 log(`

@@ -703,6 +703,7 @@ int main() {
 			const char* items[] = { 
 				"GL_POINTS", 
 				"atomicMin", 
+				"tiled atomicMin", 
 				"early-z", 
 				"reduce", 
 				"early-z & reduce",
@@ -738,6 +739,8 @@ int main() {
 				V8Helper::instance()->runScriptSilent("renderDebug = renderPointCloudBasic");
 			} else if (selectedMethod == "atomicMin") {
 				V8Helper::instance()->runScriptSilent("renderDebug = renderPointCloudCompute");
+			} else if (selectedMethod == "tiled atomicMin") {
+				V8Helper::instance()->runScriptSilent("renderDebug = render_compute_tiled");
 			} else if (selectedMethod == "early-z") {
 				V8Helper::instance()->runScriptSilent("renderDebug = render_compute_earlyDepth");
 			}else if (selectedMethod == "reduce") {

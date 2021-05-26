@@ -1,16 +1,17 @@
+log("compute_tiled.js loaded");
 
-function renderComputeBasic(node, view, proj, target){
+function render_compute_tiled(node, view, proj, target){
 
-	GLTimestamp("compute-basic-start");
+	GLTimestamp("compute-tiled-start");
 
 	// TODO support resizing
 	let width = 3000;
 	let height = 2000;
 
-	if(typeof computeState === "undefined"){
+	if(typeof computeState_tiled === "undefined"){
 
-		let pathRender = `${rootDir}/modules/compute/render.cs`;
-		let pathResolve = `${rootDir}/modules/compute/resolve.cs`;
+		let pathRender = `${rootDir}/modules/compute_tiled/render.cs`;
+		let pathResolve = `${rootDir}/modules/compute_tiled/resolve.cs`;
 
 		let csRender = new Shader([{type: gl.COMPUTE_SHADER, path: pathRender}]);
 		let csResolve = new Shader([{type: gl.COMPUTE_SHADER, path: pathResolve}]);
@@ -27,10 +28,10 @@ function renderComputeBasic(node, view, proj, target){
 
 		let fbo = new Framebuffer();
 
-		computeState = {csRender, csResolve, numPixels, ssboFramebuffer, fbo};
+		computeState_tiled = {csRender, csResolve, numPixels, ssboFramebuffer, fbo};
 	}
 
-	let fbo = computeState.fbo;
+	let fbo = computeState_tiled.fbo;
 
 	fbo.setSize(target.width, target.height);
 
@@ -49,9 +50,9 @@ function renderComputeBasic(node, view, proj, target){
 
 
 	{ // RENDER
-		GLTimestamp("compute-basic-render-start");
+		GLTimestamp("compute-tiled-render-start");
 
-		let {csRender, ssboFramebuffer} = computeState;
+		let {csRender, ssboFramebuffer} = computeState_tiled;
 
 		gl.bindFramebuffer(gl.FRAMEBUFFER, 0);
 		
@@ -79,15 +80,15 @@ function renderComputeBasic(node, view, proj, target){
 		}
 
 		gl.useProgram(0);
-		GLTimestamp("compute-basic-render-end");
+		GLTimestamp("compute-tiled-render-end");
 	}
 
 	gl.memoryBarrier(gl.ALL_BARRIER_BITS);
 
 	{ // RESOLVE
-		GLTimestamp("compute-basic-resolve-start");
+		GLTimestamp("compute-tiled-resolve-start");
 
-		let {csResolve, ssboFramebuffer} = computeState;
+		let {csResolve, ssboFramebuffer} = computeState_tiled;
 
 		gl.useProgram(csResolve.program);
 
@@ -103,7 +104,7 @@ function renderComputeBasic(node, view, proj, target){
 		gl.dispatchCompute(...groups);
 
 		gl.useProgram(0);
-		GLTimestamp("compute-basic-resolve-end");
+		GLTimestamp("compute-tiled-resolve-end");
 	}
 
 	gl.memoryBarrier(gl.ALL_BARRIER_BITS);
@@ -123,9 +124,12 @@ function renderComputeBasic(node, view, proj, target){
 	// 		gl.COLOR_BUFFER_BIT, gl.NEAREST);
 	// }
 
-	GLTimestamp("compute-basic-end");
+	GLTimestamp("compute-tiled-end");
 
 }
+
+
+
 
 renderPointCloudCompute = renderComputeBasic;
 
