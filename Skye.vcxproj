@@ -102,6 +102,7 @@
       <AdditionalDependencies>$(SolutionDir)\libs\glfw\lib\msvc2017_x64\glfw3.lib;$(SolutionDir)\libs\v8\v8_libplatform.dll.lib;$(SolutionDir)\libs\v8\v8.dll.lib;$(SolutionDir)\libs\openvr\lib\win64\openvr_api.lib;opengl32.lib;dxgi.lib;d3d11.lib;$(SolutionDir)\bin\$(Configuration)_$(Platform)\laszip.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Profile>true</Profile>
+      <StackReserveSize>4194304</StackReserveSize>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)libs\v8\run\*" "$(OutDir)"
@@ -141,6 +142,7 @@ copy /Y "$(SolutionDir)libs\openvr\openvr_api.dll" "$(OutDir)"</Command>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Profile>true</Profile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>4194304 </StackReserveSize>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)libs\v8\run\*" "$(OutDir)"
